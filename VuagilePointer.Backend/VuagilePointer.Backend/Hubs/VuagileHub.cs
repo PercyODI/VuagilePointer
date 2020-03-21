@@ -17,7 +17,19 @@ namespace VuagilePointer.Backend.Hubs
                 AuthName = "pearse.hutson",
                 FirstName = "Pearse",
                 LastName = "Hutson"
-            }
+            },
+            new UserInfo()
+            {
+                AuthName = "paul.hartman",
+                FirstName = "Paul",
+                LastName = "Hartman"
+            },
+            new UserInfo()
+            {
+                AuthName = "stephen.brink",
+                FirstName = "Stephen",
+                LastName = "Brink"
+            },
         };
         public async Task AddUserToRoom(string userAuthName, string roomName)
         {

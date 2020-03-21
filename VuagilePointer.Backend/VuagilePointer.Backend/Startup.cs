@@ -50,8 +50,12 @@ namespace VuagilePointer.Backend
             app.UseCors("allowAll");
             app.UseEndpoints(endpoints =>
             {
-                
-                endpoints.MapControllers().RequireCors("allowAll");
+                var endpointControllers = endpoints.MapControllers();
+                if (env.IsDevelopment())
+                {
+                    endpointControllers.RequireCors("allowAll");
+                }
+
                 endpoints.MapHub<VuagileHub>("/vuagileHub");
             });
         }

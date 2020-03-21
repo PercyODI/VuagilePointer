@@ -1,0 +1,11 @@
+<div id="userLoginDiv" class="d-flex flex-col justify-content-center align-items-center h-100">
+    <h1>Login:</h1>
+    <div class="d-flex">
+        <select id="loginSelect">
+            {{#each users}}
+            <option val="{{this.authName}}">{{this.firstName}} {{this.lastName}}</option>
+            {{/each}}
+        </select>
+        <button id="loginBtn">Log In</button>
+    </div>
+</div>

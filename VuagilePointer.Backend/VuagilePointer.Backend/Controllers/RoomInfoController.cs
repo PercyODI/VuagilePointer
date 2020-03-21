@@ -18,7 +18,7 @@ namespace VuagilePointer.Backend.Controllers
             return VuagileHub.Rooms;
         }
 
-        [HttpGet]
+        [HttpGet("{roomName}")]
         public ActionResult<RoomInfo> GetRoomByName(string roomName)
         {
             var foundRoom = VuagileHub.Rooms.FirstOrDefault(r => r.Name == roomName);
