@@ -51,7 +51,7 @@ jobs:
       - name: Copy via ssh
         uses: garygrossgarten/github-action-scp@v0.5.3
         with:
-          local: dist
+          local: VuagilePointer.Frontend/dist
           remote: /vuagile/frontend
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
