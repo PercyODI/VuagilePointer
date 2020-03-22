@@ -1,0 +1,55 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  publish_backend:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Move to backend
+      run: cd ./VuagilePointer.Backend
+    - name: Build with dotnet
+      run: dotnet publish --configuration Release --output ./publish
+    - name: Copy via ssh
+      uses: garygrossgarten/github-action-scp@v0.5.3
+      with:
+        local: ./publish
+        remote: /vuagile/backend/publish
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+
+      
+  publish_frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - name: Move to frontend
+        run: cd ./VuagilePoitner.Frontend
+      - name: Install dependencies
+        run: npm install
+      - name: Build frontend
+        run: npm run build:production
+      - name: Copy via ssh
+        uses: garygrossgarten/github-action-scp@v0.5.3
+        with:
+          local: ./dist
+          remote: /vuagile/frontend
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
