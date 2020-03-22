@@ -43,7 +43,6 @@ jobs:
           npm run build:production
       - name: Copy via ssh
         uses: garygrossgarten/github-action-scp@v0.5.3
-        working-directory: ./VuagilePointer.Frontend
         with:
           local: dist
           remote: /vuagile/frontend
