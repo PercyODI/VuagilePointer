@@ -27,6 +27,13 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.SSH_USER }}
         password: ${{ secrets.SSH_PASSWORD }}
+    - name: Restart app service
+      uses: appleboy/ssh-action@v0.0.7
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        script: systemctl restart vuagile.backend.service
       
   publish_frontend:
     runs-on: ubuntu-latest

@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "SET NODE_ENV=dev & webpack --config ./webpack.config.js --progress --colors",
-    "build:production": "SET NODE_ENV=prod & webpack -p --config ./webpack.config.js --progress --colors",
-    "start": "SET NODE_ENV=dev & webpack-dev-server --config ./webpack.config.js --open"
+    "build": "cross-env NODE_ENV=dev webpack --config ./webpack.config.js --progress --colors",
+    "build:production": "cross-env NODE_ENV=prod webpack -p --config ./webpack.config.js --progress --colors",
+    "start": "cross-env NODE_ENV=dev webpack-dev-server --config ./webpack.config.js --open"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "webpack": "^4.42.0"
   },
   "devDependencies": {
+    "cross-env": "^7.0.2",
     "css-loader": "^3.4.2",
     "file-loader": "^6.0.0",
     "handlebars-loader": "^1.7.1",
