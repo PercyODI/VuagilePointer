@@ -8,9 +8,7 @@ on:
 
 jobs:
   publish_backend:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
@@ -18,13 +16,13 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Build with dotnet
-      run: dotnet publish --configuration Release --output ./publish
-      working-directory: ./VuagilePointer.Backend
+      run: |
+        cd VuagilePointer.Backend
+        dotnet publish --configuration Release --output ./publish
     - name: Copy via ssh
       uses: garygrossgarten/github-action-scp@v0.5.3
-      working-directory: ./VuagilePointer.Backend
       with:
-        local: ./publish
+        local: VuagilePointer.Backend/publish
         remote: /vuagile/backend/publish
         host: ${{ secrets.HOST }}
         username: ${{ secrets.SSH_USER }}
@@ -38,12 +36,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./VuagilePointer.Frontend
-      - name: Build frontend
-        run: npm run build:production
-        working-directory: ./VuagilePointer.Frontend
+      - name: Install dependencies and build
+        run: |
+          cd VuagilePointer.Frontend
+          npm install
+          npm run build:production
       - name: Copy via ssh
         uses: garygrossgarten/github-action-scp@v0.5.3
         working-directory: ./VuagilePointer.Frontend
