@@ -29,7 +29,6 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.SSH_USER }}
         password: ${{ secrets.SSH_PASSWORD }}
-
       
   publish_frontend:
     runs-on: ubuntu-latest
